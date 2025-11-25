@@ -1,7 +1,9 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
-public class ChangeScene : MonoBehaviour
+public class Menu : MonoBehaviour
 {
+    
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -14,13 +16,13 @@ public class ChangeScene : MonoBehaviour
         
     }
 
-    void Play()
+    public void Play()
     {
-
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
 
-    void Exit()
+    public void Exit()
     {
-
+        Application.Quit();
     }
 }
