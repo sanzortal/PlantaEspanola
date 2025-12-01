@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class ChangeScene : MonoBehaviour
+public class Achivements : MonoBehaviour
 {
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -12,15 +12,5 @@ public class ChangeScene : MonoBehaviour
     void Update()
     {
         
-    }
-
-    void Play()
-    {
-
-    }
-
-    void Exit()
-    {
-
     }
 }
