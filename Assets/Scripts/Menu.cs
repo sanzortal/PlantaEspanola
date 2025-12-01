@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -7,16 +8,24 @@ public class Menu : MonoBehaviour
     public GameObject panelOptions;
     public GameObject panelAchievements;
 
+    public Image plantaFetoLocked;
+    public Sprite plantaFetoUnlocked;
+
+    private bool PlantaFeto;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
-
+        PlantaFeto = PlayerPrefs.GetInt("achievement") == 1;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (PlantaFeto == true)
+        {
+            plantaFetoLocked.sprite = plantaFetoUnlocked;
+        }
     }
 
     public void ChangeScene()
