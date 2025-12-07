@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.Playables;
 using UnityEngine.UI;
 
 public class PlantEvolution : MonoBehaviour
@@ -9,13 +10,14 @@ public class PlantEvolution : MonoBehaviour
     [SerializeField] GameObject AdultoPlanta;
     [SerializeField] GameObject ViejoPlanta;
     [SerializeField] GameObject Tumba;
+    [SerializeField] Transform imageTarget;    
 
     [SerializeField] Button wateringCan;
 
     [SerializeField] Achievements achievements;
+    [SerializeField] AudioSource notificactionSound;
 
     private int irrigation = 0;
-    private Vector3 positionPlant = new Vector3(120, 1031.54443f, 441.378296f);
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -36,38 +38,44 @@ public class PlantEvolution : MonoBehaviour
         if (irrigation == 1)
         {
             achievements.UnlockAchiviement(0);
+            notificactionSound.Play();
         }
         
         if(irrigation == 3)
         {
             Destroy(GameObject.Find("FetoPlanta"));
-            Instantiate(NinioPlanta, positionPlant, Quaternion.identity); // ahora es ninio
+            Instantiate(NinioPlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es ninio
             achievements.UnlockAchiviement(1);
+            notificactionSound.Play();
         }
         else if (irrigation == 6)
         {
             Destroy(GameObject.Find("NinioPlanta(Clone)"));
-            Instantiate(AdolescentePlanta, positionPlant, Quaternion.identity); // ahora es adolescente
+            Instantiate(AdolescentePlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es adolescente
             achievements.UnlockAchiviement(2);
+            notificactionSound.Play();
         }
         else if (irrigation == 9)
         {
             Destroy(GameObject.Find("AdolescentePlanta(Clone)"));
-            Instantiate(AdultoPlanta, positionPlant, Quaternion.identity); // ahora es adulto
+            Instantiate(AdultoPlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es adulto
             achievements.UnlockAchiviement(3);
+            notificactionSound.Play();
         }
         else if (irrigation == 12)
         {
             Destroy(GameObject.Find("AdultoPlanta(Clone)"));
-            Instantiate(ViejoPlanta, positionPlant, Quaternion.identity); // ahora es viejo
+            Instantiate(ViejoPlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es viejo
             achievements.UnlockAchiviement(4);
+            notificactionSound.Play();
         }
         else if (irrigation == 15)
         {
             Destroy(GameObject.Find("ViejoPlanta(Clone)"));
-            Instantiate(Tumba, positionPlant, Quaternion.identity); // aparece la tumba (se muere)
+            Instantiate(Tumba, imageTarget.position, Quaternion.identity, imageTarget); // aparece la tumba (se muere)
             wateringCan.interactable = false; // deja de interactuar con el botón
             achievements.UnlockAchiviement(5);
+            notificactionSound.Play();
         }
     }
 }
