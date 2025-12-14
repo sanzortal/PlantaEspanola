@@ -2,20 +2,20 @@ using System;
 using UnityEngine;
 using UnityEngine.UI;
 
-[System.Serializable]
-public class AchievementVisual
-{
-    public Image achievementsIcons;
-    public Sprite lockedAchievement;
-    public Sprite unlockedAchievement;
-}
-
 public class AchievementsMenu : MonoBehaviour
 {
+    [System.Serializable]
+    public class AchievementVisual
+    {
+        public Image image;
+        public Sprite lockedAchievement;
+        public Sprite unlockedAchievement;
+    }
+
     [SerializeField]
     private AchievementVisual[] achievements;
 
-    private void OnEnable()
+    private void Start()
     {
         UpdateIcons();
     }
@@ -24,11 +24,15 @@ public class AchievementsMenu : MonoBehaviour
     {
         for (int i = 0; i < achievements.Length; i++)
         {
-            bool unlocked = PlayerPrefs.GetInt("achievement_" + i, 0) == 1;
+            int unlocked = PlayerPrefs.GetInt("achievement_" + i, 0);
 
-            if (achievements[i].achievementsIcons == null)
+            if (unlocked == 1)
             {
-                achievements[i].achievementsIcons.sprite = unlocked ? achievements[i].unlockedAchievement : achievements[i].lockedAchievement;
+                achievements[i].image.sprite = achievements[i].unlockedAchievement;
+            }
+            else
+            {
+                achievements[i].image.sprite = achievements[i].lockedAchievement;
             }
         }
     }

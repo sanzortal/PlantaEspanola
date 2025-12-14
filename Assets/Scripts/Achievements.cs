@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Achievements : MonoBehaviour
@@ -6,6 +7,7 @@ public class Achievements : MonoBehaviour
     private GameObject panelUnlocked;
     [SerializeField]
     private GameObject[] achievementUI;
+    [SerializeField] AudioSource notificactionSound;
 
     //[SerializeField]
     //private Animator animator;
@@ -30,17 +32,23 @@ public class Achievements : MonoBehaviour
 
         PlayerPrefs.SetInt("achievement_" + id, 1);
 
-        panelUnlocked.SetActive(true);
 
         for (int i = 0; i < achievementUI.Length; i++)
         {
             achievementUI[i].SetActive(i == id);
         }
+        
+        StartCoroutine(NotificationCoroutine());
 
-        //if(animator != null)
-        //{
-        //    animator.SetTrigger("Show");
-        //}
 
     }
+
+    IEnumerator NotificationCoroutine()
+    {
+        panelUnlocked.SetActive(true);
+        notificactionSound.Play();
+        yield return new WaitForSeconds(1f);
+        panelUnlocked.SetActive(false);
+    }
+
 }

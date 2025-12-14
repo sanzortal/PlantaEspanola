@@ -15,7 +15,6 @@ public class PlantEvolution : MonoBehaviour
     [SerializeField] Button wateringCan;
 
     [SerializeField] Achievements achievements;
-    [SerializeField] AudioSource notificactionSound;
 
     private int irrigation = 0;
 
@@ -38,7 +37,6 @@ public class PlantEvolution : MonoBehaviour
         if (irrigation == 1)
         {
             achievements.UnlockAchiviement(0);
-            notificactionSound.Play();
         }
         
         if(irrigation == 3)
@@ -46,28 +44,24 @@ public class PlantEvolution : MonoBehaviour
             Destroy(GameObject.Find("FetoPlanta"));
             Instantiate(NinioPlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es ninio
             achievements.UnlockAchiviement(1);
-            notificactionSound.Play();
         }
         else if (irrigation == 6)
         {
             Destroy(GameObject.Find("NinioPlanta(Clone)"));
             Instantiate(AdolescentePlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es adolescente
             achievements.UnlockAchiviement(2);
-            notificactionSound.Play();
         }
         else if (irrigation == 9)
         {
             Destroy(GameObject.Find("AdolescentePlanta(Clone)"));
             Instantiate(AdultoPlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es adulto
             achievements.UnlockAchiviement(3);
-            notificactionSound.Play();
         }
         else if (irrigation == 12)
         {
             Destroy(GameObject.Find("AdultoPlanta(Clone)"));
             Instantiate(ViejoPlanta, imageTarget.position, Quaternion.identity, imageTarget); // ahora es viejo
             achievements.UnlockAchiviement(4);
-            notificactionSound.Play();
         }
         else if (irrigation == 15)
         {
@@ -75,7 +69,6 @@ public class PlantEvolution : MonoBehaviour
             Instantiate(Tumba, imageTarget.position, Quaternion.identity, imageTarget); // aparece la tumba (se muere)
             wateringCan.interactable = false; // deja de interactuar con el botón
             achievements.UnlockAchiviement(5);
-            notificactionSound.Play();
         }
     }
 }
